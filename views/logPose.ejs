@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Grand Line Registry </title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-base-200 min-h-screen">
+    <%- include('partials/navbar') %>
+
+    <main class="container mx-auto p-8">
+        <div class="alert alert-info shadow-sm mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span><strong>Log Entry:</strong> <%= log %></span>
+        </div>
+
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-black text-accent mb-4">Destination Reached: Laugh Tale</h1>
+            <p class="text-xl">The Log Pose has locked onto the final island. The One Piece is near!</p>
+        </div>
+
+        <h2 class="text-2xl font-bold mb-4">Active Crew Members on Deck</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <% for(let member of crew) { %>
+                <% if(member.status === 'active') { %>
+                    <div class="card card-side bg-base-100 shadow-md border-l-4 border-success">
+                        <div class="card-body">
+                            <h3 class="card-title"><%= member.name %></h3>
+                            <p><%= member.role %></p>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

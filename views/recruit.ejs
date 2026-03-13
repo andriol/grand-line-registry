@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Grand Line Registry </title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-base-200 min-h-screen">
+    <%- include('partials/navbar') %>
+
+    <main class="container mx-auto p-8 max-w-2xl">
+        <h1 class="text-4xl font-bold text-center mb-6">Join the Straw Hat Crew</h1>
+
+        <% if (errors && errors.length > 0) { %>
+            <div class="alert alert-error shadow-lg mb-6">
+                <ul>
+                    <% errors.forEach(err => { %>
+                        <li><%= err %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+
+        <% if (success) { %>
+    <div class="alert alert-success shadow-lg mb-6">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>
+                Application received, <strong><%= applicantName %></strong>! 
+                Your skill in <strong><%= applicantSkill %></strong> has been noted. 
+                Check the Crew Roster - your application is pending Luffy's approval.
+            </span>
+        </div>
+    </div>
+    <% } %>
+
+        <div class="card bg-base-100 shadow-xl">
+            <form action="/recruit" method="POST" class="card-body gap-4">
+                <div class="form-control">
+                    <label class="label"><span class="label-text">Your Name</span></label>
+                    <input type="text" name="applicantName" placeholder="Monkey D. Luffy" class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label class="label"><span class="label-text">Special Skill</span></label>
+                    <input type="text" name="skill" placeholder="Swordsmanship, Cooking, etc." class="input input-bordered" />
+                </div>
+
+                <div class="form-control">
+                    <label class="label"><span class="label-text">Desired Role</span></label>
+                    <select name="role" class="select select-bordered">
+                        <option disabled selected>Select a role</option>
+                        <option>Navigator</option>
+                        <option>Cook</option>
+                        <option>Sniper</option>
+                        <option>Doctor</option>
+                        <option>Musician</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label class="label"><span class="label-text">Why should Luffy let you join?</span></label>
+                    <textarea name="message" class="textarea textarea-bordered h-24" placeholder="Tell us your dream..."></textarea>
+                </div>
+
+                <div class="form-control">
+                    <span class="label-text mb-2">Preferred Sea</span>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="label cursor-pointer gap-2">
+                            <input type="radio" name="sea" value="East Blue" class="radio radio-primary" /> <span>East Blue</span>
+                        </label>
+                        <label class="label cursor-pointer gap-2">
+                            <input type="radio" name="sea" value="West Blue" class="radio radio-primary" /> <span>West Blue</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label cursor-pointer justify-start gap-4">
+                        <input type="checkbox" name="agreeTerms" class="checkbox checkbox-secondary" />
+                        <span class="label-text">I understand the risks of the Grand Line</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full mt-4">Submit Application</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

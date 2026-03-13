@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Line Registry</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-base-200 min-h-screen">
+    <%- include('partials/navbar') %>
+
+    <main class="container mx-auto py-10">
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-extrabold text-primary mb-2">The Straw Hat Pirates</h1>
+            <p class="text-xl opacity-70">The crew sailing toward the title of King of the Pirates</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <% crew.forEach(member => { %>
+                <div class="card bg-base-100 shadow-xl border border-base-300">
+                    <div class="card-body">
+                        <h2 class="card-title text-secondary"><%= member.name %></h2>
+                        <p><strong>Role:</strong> <%= member.role %></p>
+                        <p><strong>Fruit:</strong> <%= member.devilFruit %></p>
+                        <p><strong>Bounty:</strong> <%= member.bounty.toLocaleString() %> Berries</p>
+                        
+                        <div class="card-actions justify-between items-center mt-4">
+                            <% if (member.status === 'active') { %>
+                                <span class="badge badge-success p-3">Active</span>
+                            <% } else if (member.status === 'pending') { %>
+                                <span class="badge badge-warning p-3">Pending Approval</span>
+                            <% } else { %>
+                                <span class="badge badge-error p-3">Bounty Frozen</span>
+                            <% } %>
+                            
+                            <a href="/crew" class="btn btn-outline btn-sm">View All Crew</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        </main>
+</body>
+</html>

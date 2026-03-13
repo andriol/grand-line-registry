@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Grand Line Registry </title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-base-200 min-h-screen">
+    <%- include('partials/navbar') %>
+
+    <main class="container mx-auto py-10">
+        <div class="mb-8 px-6">
+            <h1 class="text-4xl font-bold">Crew Roster</h1>
+            <p class="text-gray-500">Official bounty records of the Straw Hat fleet.</p>
+        </div>
+
+        <div class="overflow-x-auto p-6">
+          <table class="table table-zebra w-full bg-base-100 shadow-md">
+            <thead>
+              <tr class="bg-primary text-primary-content">
+                <th>#</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Devil Fruit</th>
+                <th>Bounty</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let member of crew) { %>
+                <tr>
+                  <td><%= member.id %></td>
+                  <td class="font-bold"><%= member.name %></td>
+                  <td><%= member.role %></td>
+                  <td><%= member.devilFruit %></td>
+                  <td><%= member.bounty.toLocaleString() %> Berries</td>
+                  <td>
+                    <% if (member.status === 'active') { %>
+                      <div class="badge badge-success">Active</div>
+                    <% } else if (member.status === 'pending') { %>
+                      <div class="badge badge-warning">Pending Approval</div>
+                    <% } else { %>
+                      <div class="badge badge-error">Bounty Frozen</div>
+                    <% } %>
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        </main>
+</body>
+</html>
